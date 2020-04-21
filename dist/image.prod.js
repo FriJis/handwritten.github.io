@@ -1,0 +1,1 @@
+"use strict";window.getImage=function(e){var t=e.toDataURL(),a=new Image(1920,1080);return a.src=t,a},window.saveImage=function(e){var t=document.createElement("a");t.setAttribute("href",e.src),t.setAttribute("download","canvasImage"),t.click()};

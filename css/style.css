@@ -1,0 +1,69 @@
+@font-face {
+    font-family: main;
+    src: url(../fonts/main.ttf);
+}
+
+* {
+    font-family: font;
+}
+
+@font-face {
+    font-family: font;
+    src: url(../fonts/HelveticaNeueCyr-Light.ttf);
+}
+
+[panel] {
+    display: none;
+}
+
+[panel].active {
+    display: flex;
+}
+
+canvas {
+    margin: 20px auto;
+    width: 100%;
+    display: block;
+}
+
+.content {
+    width: 100%;
+    max-width: 1280px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+textarea {
+    resize: vertical;
+    width: 100%;
+    min-height: 500px;
+}
+
+.inputs {
+    position: fixed;
+    right: 40px;
+    bottom: 0;
+    width: 300px;
+    box-shadow: 0 0 20px -10px black;
+    background: white;
+}
+
+input {
+    --margin: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    width: calc(100% - var(--margin) * 2);
+    margin: var(--margin);
+}
+
+input[type="checkbox"] {
+    width: 15px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex.column {
+    flex-direction: column;
+}
