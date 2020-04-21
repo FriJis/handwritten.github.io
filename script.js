@@ -16,13 +16,8 @@ window.fontColor = 'black'
 window.lineDelimiter = 1
 
 window.start = () => {
-    ctx.clearRect(0, 0, canv.width, canv.height)
-    // ctx.moveTo(0, 0)
-    // ctx.lineTo(canv.width, 0)
-    // ctx.lineTo(canv.width, canv.height)
-    // ctx.lineTo(0, canv.height)
-    // ctx.lineTo(0, 0)
-    // ctx.stroke(); 
+    ctx.clearRect(0, 0, canv.width, canv.height * currentPage)
+    updateCurrentPage()
     class textHelper {
         constructor() {
             this.space = indentLeft
@@ -54,53 +49,53 @@ window.start = () => {
         if (item == '\n') {
             textH.newStr()
         }
-        if (lineDelimiter) {
-            for (let i = 1; i < countList; i++) {
-                ctx.beginPath();
-                ctx.moveTo(0, ((3 * canv.width) / 2) * i)
-                ctx.lineTo(canv.width, ((3 * canv.width) / 2) * i)
-                ctx.stroke();
-                ctx.lineWidth = 1;
-                ctx.closePath()
-            }
-        }
-        if (textH.str >= canv.height) {
-            countList++
-            canv.height = ((3 * canv.width) / 2) * countList
-        }
+
         ctx.fillStyle = fontColor
         ctx.fillText(item, textH.space, textH.str + (Math.random() * wave) + 20);
     })
 }
 window.text = [...'']
 window.countList = 1
-canv.height = ((3 * canv.width) / 2) * countList
+canv.height = ((3 * canv.width) / 2)
 window.hiddenSwitcher = 1
+window.currentPage = 1
 var uiPanel = document.querySelector('[panel]')
 addEventListener('keydown', event => {
-    // console.log(event.code)
     if (event.code == 'F4') {
         hiddenSwitcher = !hiddenSwitcher
         if (!hiddenSwitcher) {
             uiPanel.classList.remove('active')
         } else {
             uiPanel.classList.add('active')
-
         }
     }
 })
 addEventListener('keydown', event => {
-    // console.log(event.code)
     if (event.code == 'F9') {
         saveImage(getImage(canv))
     }
 })
 addEventListener('keydown', event => {
-    // console.log(event.code)
     if (event.code == 'F7') {
         start()
     }
 })
+updateCurrentPage = () => {
+    let el = document.querySelector('#cur-page')
+    el.innerHTML = currentPage
+}
+window.nextPagination = () => {
+    currentPage++
+    ctx.translate(0, -canv.height)
+    start()
+}
+window.prevPagination = () => {
+    if (currentPage > 1) {
+        currentPage--
+        ctx.translate(0, canv.height)
+        start()
+    }
+}
 
 start()
 

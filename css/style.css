@@ -67,3 +67,21 @@ input[type="checkbox"] {
 .flex.column {
     flex-direction: column;
 }
+.pagination {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    user-select: none;
+}
+.pagination .arrow.btn:hover {
+    background: silver;
+}
+.pagination .arrow {
+    padding: 10px;
+    cursor: pointer;
+    background: white;
+}

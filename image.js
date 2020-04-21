@@ -1,6 +1,6 @@
 window.getImage = (canvas) => {
     var imageData = canvas.toDataURL();
-    var image = new Image(1920, 1080);
+    var image = new Image();
     image.src = imageData;
     return image;
 }
