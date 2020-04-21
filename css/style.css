@@ -7,6 +7,7 @@
     font-family: font;
 }
 
+
 @font-face {
     font-family: font;
     src: url(../fonts/HelveticaNeueCyr-Light.ttf);
@@ -20,10 +21,13 @@
     display: flex;
 }
 
-canvas {
-    margin: 20px auto;
-    width: 100%;
+canvas, img {
     display: block;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .content {
@@ -31,6 +35,7 @@ canvas {
     max-width: 1280px;
     margin-right: auto;
     margin-left: auto;
+    position: relative;
 }
 
 textarea {
@@ -46,6 +51,7 @@ textarea {
     width: 300px;
     box-shadow: 0 0 20px -10px black;
     background: white;
+    z-index: 20;
 }
 
 input {
@@ -76,6 +82,10 @@ input[type="checkbox"] {
     border-radius: 10px;
     overflow: hidden;
     user-select: none;
+    z-index: 900;
+}
+.pagination:nth-child(2) {
+    bottom: 90px;
 }
 .pagination .arrow.btn:hover {
     background: silver;

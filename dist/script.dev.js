@@ -25,12 +25,18 @@ window.randomSize = 0;
 window.indentTop = 10;
 window.indentRight = 20;
 window.indentLeft = 20;
+window.indentBottom = 20;
 window.fontSize = 30;
 window.fontColor = 'black';
 window.lineDelimiter = 1;
+window.bgStyle = 'notebook'; //notebook, zebra
 
 window.start = function () {
   ctx.clearRect(0, 0, canv.width, canv.height * currentPage);
+  var current = {
+    page: 1,
+    textOnPage: indentTop
+  };
   updateCurrentPage();
 
   var textHelper =
@@ -52,10 +58,8 @@ window.start = function () {
       key: "includeStr",
       value: function includeStr() {
         this.str += lineHeight;
+        current.textOnPage += lineHeight;
       }
-    }, {
-      key: "perlin",
-      value: function perlin() {}
     }, {
       key: "newStr",
       value: function newStr() {
@@ -80,16 +84,21 @@ window.start = function () {
       textH.newStr();
     }
 
+    if (current.textOnPage > canv.height) {
+      current.page += 1;
+      current.textOnPage = indentTop;
+    }
+
     ctx.fillStyle = fontColor;
-    ctx.fillText(item, textH.space, textH.str + Math.random() * wave + 20);
+    ctx.fillText(item, textH.space, current.textOnPage + canv.height * (current.page - 1) + Math.random() * wave + 20);
   });
 };
 
 window.text = _toConsumableArray('');
-window.countList = 1;
 canv.height = 3 * canv.width / 2;
 window.hiddenSwitcher = 1;
 window.currentPage = 1;
+window.allPage = 1;
 var uiPanel = document.querySelector('[panel]');
 addEventListener('keydown', function (event) {
   if (event.code == 'F4') {

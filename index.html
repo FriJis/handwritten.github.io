@@ -15,23 +15,41 @@
         <form class="inputs flex column">
             <input type="number" placeholder="Расстояние между буквами (16)"
                 oninput="spacing = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Высота строки (40)" oninput="lineHeight = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Разброс по высоте (1)" oninput="wave = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Разброс по размеру (0)" oninput="randomSize = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Отступ сверху (10)" oninput="indentTop = event.target.valueAsNumber, start()">
+            <input type="number" placeholder="Высота строки (40)"
+                oninput="lineHeight = event.target.valueAsNumber, start()">
+            <input type="number" placeholder="Разброс по высоте (1)"
+                oninput="wave = event.target.valueAsNumber, start()">
+            <input type="number" placeholder="Разброс по размеру (0)"
+                oninput="randomSize = event.target.valueAsNumber, start()">
+            <input type="number" placeholder="Отступ сверху (10)"
+                oninput="indentTop = event.target.valueAsNumber, start()">
             <input type="number" placeholder="Отступ справа (20)"
                 oninput="indentRight = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Отступ слева(20)" oninput="indentLeft = event.target.valueAsNumber, start()">
+            <input type="number" placeholder="Отступ слева(20)"
+                oninput="indentLeft = event.target.valueAsNumber, start()">
             <input type="color" placeholder="Цвет" oninput="fontColor = event.target.value, start()">
-            <input type="number" placeholder="Размер текста(30)" oninput="fontSize = event.target.valueAsNumber, start()">
+            <input type="number" placeholder="Размер текста(30)"
+                oninput="fontSize = event.target.valueAsNumber, start()">
         </form>
     </div>
     <div class="pagination flex">
-        <div class="arrow btn" onclick="prevPagination()"><</div>
+        <div class="arrow btn" onclick="prevPagination()">❮</div>
         <div class="arrow" id="cur-page"></div>
-        <div class="arrow btn" onclick="nextPagination()">></div>
+        <div class="arrow btn" onclick="nextPagination()">❯</div>
     </div>
-    <canvas id="canv"></canvas>
+    <div class="pagination flex">
+        <div class="arrow btn" onclick="canv.height -= 100, start()">❮❮</div>
+        <div class="arrow btn" onclick="canv.height -= 10, start()">-</div>
+        <div class="arrow btn" onclick="canv.height -= 1, start()">.</div>
+        <div class="arrow btn" onclick="canv.height += 1, start()">*</div>
+        <div class="arrow btn" onclick="canv.height += 10, start()">+</div>
+        <div class="arrow btn" onclick="canv.height += 100, start()">❯❯</div>
+    </div>
+    <div class="content">
+        <img src="img/notebook.jpg" id="notebook">
+        <canvas id="canv"></canvas>
+    </div>
+
     <script src="image.js"></script>
     <script src="script.js"></script>
 </body>
