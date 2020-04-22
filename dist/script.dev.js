@@ -67,9 +67,10 @@ window.start = function () {
         var _this = this;
 
         var page = 1;
+        var step = 0;
         this.arr = [];
         text.forEach(function (item, index) {
-          _this.arr[index] = {
+          _this.arr[index + step] = {
             page: page,
             posX: _this.posX,
             posY: _this.posY + Math.random() * wave + 20,
@@ -78,6 +79,16 @@ window.start = function () {
           _this.posX += spacing;
 
           if (_this.posX >= canv.width - indentRight) {
+            if (item[index + 1 + step] !== '\n' || item[index + 1 + step] !== '&#160;' || item[index + 1 + step] !== '.') {
+              _this.arr[index + 1 + step] = {
+                page: page,
+                posX: _this.posX,
+                posY: _this.posY + Math.random() * wave + 20,
+                symbol: '-'
+              };
+              step++;
+            }
+
             _this.newY();
           }
 

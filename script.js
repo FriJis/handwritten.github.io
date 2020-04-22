@@ -45,10 +45,11 @@ window.start = () => {
         parse(text)
         {
             var page = 1
+            var step = 0
             this.arr = []
 
             text.forEach((item, index) => {
-                this.arr[index] = {
+                this.arr[index + step] = {
                     page: page,
                     posX: this.posX,
                     posY: this.posY + (Math.random() * wave) + 20,
@@ -57,6 +58,16 @@ window.start = () => {
                 this.posX += spacing
                 if(this.posX >= canv.width - indentRight)
                 {
+                    if(item[index + 1 + step] !== '\n' || item[index + 1 + step] !== '&#160;' || item[index + 1 + step] !== '.')
+                    {
+                        this.arr[index + 1 + step] = {
+                            page: page,
+                            posX: this.posX,
+                            posY: this.posY + (Math.random() * wave) + 20,
+                            symbol: '-'
+                        }
+                        step++
+                    }
                     this.newY()
                 }
                 if(this.posY >= canv.height - indentBottom)
