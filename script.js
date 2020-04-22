@@ -18,59 +18,66 @@ window.lineDelimiter = 1
 window.bgStyle = 'notebook' //notebook, zebra
 
 window.start = () => {
-    ctx.clearRect(0, 0, canv.width, canv.height * currentPage)
-    var current = {
-        page: 1,
-        textOnPage: indentTop
-    }
+    ctx.clearRect(0, 0, canv.width, canv.height)
     updateCurrentPage()
     class textHelper {
         constructor() {
-            this.space = indentLeft
-            this.str = indentTop
+            this.reset()
         }
-        includeSpace() {
-            this.space += spacing
+        reset()
+        {
+            this.posX = indentLeft
+            this.posY = indentTop
         }
-        includeStr() {
-            this.str += lineHeight
-            current.textOnPage += lineHeight
+        newY()
+        {
+            this.posX = indentLeft
+            this.posY += lineHeight
         }
-        newStr() {
-            this.space = indentLeft
-            this.includeStr()
+        parse(text)
+        {
+            var page = 1
+            this.arr = []
+
+            text.forEach((item, index) => {
+                this.arr[index] = {
+                    page: page,
+                    posX: this.posX,
+                    posY: this.posY + (Math.random() * wave) + 20,
+                    symbol: item
+                }
+                this.posX += spacing
+                if(this.posX >= canv.width - indentRight)
+                {
+                    this.newY()
+                }
+                if(this.posY >= canv.height - indentBottom)
+                {
+                    page++
+                    this.reset()
+                }
+                if (item == '\n') {
+                    this.newY()
+                }
+            })
+            return this.arr
         }
     }
-
-    var textH = new textHelper()
-
-    text.forEach(item => {
-        ctx.font = `${fontSize + (Math.random() * randomSize - randomSize)}px main`;
-
-        textH.includeSpace()
-        if (textH.space > canv.width - indentRight) {
-            textH.newStr()
+    window.textH = new textHelper()
+    ctx.font = `${fontSize + (Math.random() * randomSize - randomSize)}px main`;
+    ctx.fillStyle = fontColor
+    textH.parse(text).forEach(item => {
+        if(item.page == currentPage)
+        {
+            ctx.fillText(item.symbol, item.posX, item.posY);
         }
-        if (item == '\n') {
-            textH.newStr()
-        }
-        if (current.textOnPage > canv.height) {
-            current.page += 1
-            current.textOnPage = indentTop
-        }
-        ctx.fillStyle = fontColor
-        ctx.fillText(item, textH.space, (current.textOnPage + ( canv.height * (current.page - 1) )) + (Math.random() * wave) + 20);
-
-
     })
 }
-
 
 window.text = [...'']
 canv.height = ((3 * canv.width) / 2)
 window.hiddenSwitcher = 1
 window.currentPage = 1
-window.allPage = 1
 var uiPanel = document.querySelector('[panel]')
 addEventListener('keydown', event => {
     if (event.code == 'F4') {
@@ -98,13 +105,11 @@ updateCurrentPage = () => {
 }
 window.nextPagination = () => {
     currentPage++
-    ctx.translate(0, -canv.height)
     start()
 }
 window.prevPagination = () => {
     if (currentPage > 1) {
         currentPage--
-        ctx.translate(0, canv.height)
         start()
     }
 }

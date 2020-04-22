@@ -32,11 +32,7 @@ window.lineDelimiter = 1;
 window.bgStyle = 'notebook'; //notebook, zebra
 
 window.start = function () {
-  ctx.clearRect(0, 0, canv.width, canv.height * currentPage);
-  var current = {
-    page: 1,
-    textOnPage: indentTop
-  };
+  ctx.clearRect(0, 0, canv.width, canv.height);
   updateCurrentPage();
 
   var textHelper =
@@ -45,52 +41,65 @@ window.start = function () {
     function textHelper() {
       _classCallCheck(this, textHelper);
 
-      this.space = indentLeft;
-      this.str = indentTop;
+      this.reset();
     }
 
     _createClass(textHelper, [{
-      key: "includeSpace",
-      value: function includeSpace() {
-        this.space += spacing;
+      key: "reset",
+      value: function reset() {
+        this.posX = indentLeft;
+        this.posY = indentTop;
       }
     }, {
-      key: "includeStr",
-      value: function includeStr() {
-        this.str += lineHeight;
-        current.textOnPage += lineHeight;
+      key: "newY",
+      value: function newY() {
+        this.posX = indentLeft;
+        this.posY += lineHeight;
       }
     }, {
-      key: "newStr",
-      value: function newStr() {
-        this.space = indentLeft;
-        this.includeStr();
+      key: "parse",
+      value: function parse(text) {
+        var _this = this;
+
+        var page = 1;
+        this.arr = [];
+        text.forEach(function (item, index) {
+          _this.arr[index] = {
+            page: page,
+            posX: _this.posX,
+            posY: _this.posY + Math.random() * wave + 20,
+            symbol: item
+          };
+          _this.posX += spacing;
+
+          if (_this.posX >= canv.width - indentRight) {
+            _this.newY();
+          }
+
+          if (_this.posY >= canv.height - indentBottom) {
+            page++;
+
+            _this.reset();
+          }
+
+          if (item == '\n') {
+            _this.newY();
+          }
+        });
+        return this.arr;
       }
     }]);
 
     return textHelper;
   }();
 
-  var textH = new textHelper();
-  text.forEach(function (item) {
-    ctx.font = "".concat(fontSize + (Math.random() * randomSize - randomSize), "px main");
-    textH.includeSpace();
-
-    if (textH.space > canv.width - indentRight) {
-      textH.newStr();
+  window.textH = new textHelper();
+  ctx.font = "".concat(fontSize + (Math.random() * randomSize - randomSize), "px main");
+  ctx.fillStyle = fontColor;
+  textH.parse(text).forEach(function (item) {
+    if (item.page == currentPage) {
+      ctx.fillText(item.symbol, item.posX, item.posY);
     }
-
-    if (item == '\n') {
-      textH.newStr();
-    }
-
-    if (current.textOnPage > canv.height) {
-      current.page += 1;
-      current.textOnPage = indentTop;
-    }
-
-    ctx.fillStyle = fontColor;
-    ctx.fillText(item, textH.space, current.textOnPage + canv.height * (current.page - 1) + Math.random() * wave + 20);
   });
 };
 
@@ -98,7 +107,6 @@ window.text = _toConsumableArray('');
 canv.height = 3 * canv.width / 2;
 window.hiddenSwitcher = 1;
 window.currentPage = 1;
-window.allPage = 1;
 var uiPanel = document.querySelector('[panel]');
 addEventListener('keydown', function (event) {
   if (event.code == 'F4') {
@@ -129,14 +137,12 @@ updateCurrentPage = function updateCurrentPage() {
 
 window.nextPagination = function () {
   currentPage++;
-  ctx.translate(0, -canv.height);
   start();
 };
 
 window.prevPagination = function () {
   if (currentPage > 1) {
     currentPage--;
-    ctx.translate(0, canv.height);
     start();
   }
 };
