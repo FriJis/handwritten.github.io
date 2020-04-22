@@ -32,23 +32,40 @@ window.start = () => {
         constructor() {
             this.reset()
         }
-        reset()
-        {
+        reset() {
             this.posX = indentLeft
             this.posY = indentTop
         }
-        newY()
-        {
+        newY() {
             this.posX = indentLeft
             this.posY += lineHeight
         }
-        parse(text)
-        {
+        parse(text) {
             var page = 1
             var step = 0
             this.arr = []
 
             text.forEach((item, index) => {
+                if (text[index] == " ") {
+                    var length = this.posX
+                    for (var i = index + 1; text[i] !== " " && i <= text.length; i++) {
+                        length += spacing
+                    }
+                    if (length >= canv.width - indentRight) {
+                        this.newY()
+                    }
+                }
+                if (this.posX >= canv.width - indentRight) {
+
+                    this.newY()
+                }
+                if (this.posY >= canv.height - indentBottom) {
+                    page++
+                    this.reset()
+                }
+                if (item == '\n') {
+                    this.newY()
+                }
                 this.arr[index + step] = {
                     page: page,
                     posX: this.posX,
@@ -56,28 +73,6 @@ window.start = () => {
                     symbol: item
                 }
                 this.posX += spacing
-                if(this.posX >= canv.width - indentRight)
-                {
-                    if(item[index + 1 + step] !== '\n' || item[index + 1 + step] !== '&#160;' || item[index + 1 + step] !== '.')
-                    {
-                        this.arr[index + 1 + step] = {
-                            page: page,
-                            posX: this.posX,
-                            posY: this.posY + (Math.random() * wave) + 20,
-                            symbol: '-'
-                        }
-                        step++
-                    }
-                    this.newY()
-                }
-                if(this.posY >= canv.height - indentBottom)
-                {
-                    page++
-                    this.reset()
-                }
-                if (item == '\n') {
-                    this.newY()
-                }
             })
             return this.arr
         }
@@ -86,8 +81,7 @@ window.start = () => {
     ctx.font = `${fontSize + (Math.random() * randomSize - randomSize)}px main`;
     ctx.fillStyle = fontColor
     textH.parse(text).forEach(item => {
-        if(item.page == currentPage)
-        {
+        if (item.page == currentPage) {
             ctx.fillText(item.symbol, item.posX, item.posY);
         }
     })

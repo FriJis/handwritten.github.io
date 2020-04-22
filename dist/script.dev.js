@@ -70,25 +70,19 @@ window.start = function () {
         var step = 0;
         this.arr = [];
         text.forEach(function (item, index) {
-          _this.arr[index + step] = {
-            page: page,
-            posX: _this.posX,
-            posY: _this.posY + Math.random() * wave + 20,
-            symbol: item
-          };
-          _this.posX += spacing;
+          if (text[index] == " ") {
+            var length = _this.posX;
 
-          if (_this.posX >= canv.width - indentRight) {
-            if (item[index + 1 + step] !== '\n' || item[index + 1 + step] !== '&#160;' || item[index + 1 + step] !== '.') {
-              _this.arr[index + 1 + step] = {
-                page: page,
-                posX: _this.posX,
-                posY: _this.posY + Math.random() * wave + 20,
-                symbol: '-'
-              };
-              step++;
+            for (var i = index + 1; text[i] !== " " && i <= text.length; i++) {
+              length += spacing;
             }
 
+            if (length >= canv.width - indentRight) {
+              _this.newY();
+            }
+          }
+
+          if (_this.posX >= canv.width - indentRight) {
             _this.newY();
           }
 
@@ -101,6 +95,14 @@ window.start = function () {
           if (item == '\n') {
             _this.newY();
           }
+
+          _this.arr[index + step] = {
+            page: page,
+            posX: _this.posX,
+            posY: _this.posY + Math.random() * wave + 20,
+            symbol: item
+          };
+          _this.posX += spacing;
         });
         return this.arr;
       }
