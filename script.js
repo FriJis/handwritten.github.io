@@ -1,33 +1,9 @@
 var canv = document.getElementById('canv')
 var ctx = canv.getContext('2d')
 
-
-// canv.width = document.body.clientWidth - 20
-canv.width = 1920
-window.spacing = 16
-window.lineHeight = 40
-window.wave = 1
-window.randomSize = 0;
-window.indentTop = 10
-window.indentRight = 20
-window.indentLeft = 20
-window.indentBottom = 20
-window.fontSize = 30
-window.fontColor = 'black'
-window.lineDelimiter = 1
-
-window.currentBg = 1
-
-
-window.backgrounds = {
-    1: 'img/notebook.jpg',
-    2: 'img/zebra.jpg'
-}
-
 window.start = () => {
     document.getElementById('bg-image').src = backgrounds[currentBg]
     ctx.clearRect(0, 0, canv.width, canv.height)
-    updateCurrentPage()
     class textHelper {
         constructor() {
             this.reset()
@@ -66,6 +42,7 @@ window.start = () => {
                 if (item == '\n') {
                     this.newY()
                 }
+                allPage = page
                 this.arr[index + step] = {
                     page: page,
                     posX: this.posX,
@@ -85,12 +62,13 @@ window.start = () => {
             ctx.fillText(item.symbol, item.posX, item.posY);
         }
     })
+    updateCurrentPage()
 }
 
 window.text = [...'']
-canv.height = ((3 * canv.width) / 2)
 window.hiddenSwitcher = 1
 window.currentPage = 1
+window.allPage = 1
 var uiPanel = document.querySelector('[panel]')
 addEventListener('keydown', event => {
     if (event.code == 'F4') {
@@ -114,11 +92,13 @@ addEventListener('keydown', event => {
 })
 updateCurrentPage = () => {
     let el = document.querySelector('#cur-page')
-    el.innerHTML = currentPage
+    el.innerHTML = currentPage + '/' + allPage
 }
 window.nextPagination = () => {
-    currentPage++
-    start()
+    if (currentPage < allPage) {
+        currentPage++
+        start()
+    }
 }
 window.prevPagination = () => {
     if (currentPage > 1) {
@@ -126,7 +106,7 @@ window.prevPagination = () => {
         start()
     }
 }
-
+onpreset()
 start()
 
 window.input = e => {

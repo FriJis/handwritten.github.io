@@ -15,30 +15,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var canv = document.getElementById('canv');
-var ctx = canv.getContext('2d'); // canv.width = document.body.clientWidth - 20
-
-canv.width = 1920;
-window.spacing = 16;
-window.lineHeight = 40;
-window.wave = 1;
-window.randomSize = 0;
-window.indentTop = 10;
-window.indentRight = 20;
-window.indentLeft = 20;
-window.indentBottom = 20;
-window.fontSize = 30;
-window.fontColor = 'black';
-window.lineDelimiter = 1;
-window.currentBg = 1;
-window.backgrounds = {
-  1: 'img/notebook.jpg',
-  2: 'img/zebra.jpg'
-};
+var ctx = canv.getContext('2d');
 
 window.start = function () {
   document.getElementById('bg-image').src = backgrounds[currentBg];
   ctx.clearRect(0, 0, canv.width, canv.height);
-  updateCurrentPage();
 
   var textHelper =
   /*#__PURE__*/
@@ -96,6 +77,7 @@ window.start = function () {
             _this.newY();
           }
 
+          allPage = page;
           _this.arr[index + step] = {
             page: page,
             posX: _this.posX,
@@ -119,12 +101,13 @@ window.start = function () {
       ctx.fillText(item.symbol, item.posX, item.posY);
     }
   });
+  updateCurrentPage();
 };
 
 window.text = _toConsumableArray('');
-canv.height = 3 * canv.width / 2;
 window.hiddenSwitcher = 1;
 window.currentPage = 1;
+window.allPage = 1;
 var uiPanel = document.querySelector('[panel]');
 addEventListener('keydown', function (event) {
   if (event.code == 'F4') {
@@ -150,12 +133,14 @@ addEventListener('keydown', function (event) {
 
 updateCurrentPage = function updateCurrentPage() {
   var el = document.querySelector('#cur-page');
-  el.innerHTML = currentPage;
+  el.innerHTML = currentPage + '/' + allPage;
 };
 
 window.nextPagination = function () {
-  currentPage++;
-  start();
+  if (currentPage < allPage) {
+    currentPage++;
+    start();
+  }
 };
 
 window.prevPagination = function () {
@@ -165,6 +150,7 @@ window.prevPagination = function () {
   }
 };
 
+onpreset();
 start();
 
 window.input = function (e) {
