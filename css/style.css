@@ -21,7 +21,7 @@
     display: flex;
 }
 
-canvas, img {
+.content canvas, .content img {
     display: block;
     width: 100%;
     position: absolute;
@@ -42,6 +42,13 @@ textarea {
     resize: vertical;
     width: 100%;
     min-height: 500px;
+    padding: 20px;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #444444;
+    margin: 20px 0;
+    background-color: #f2f2f2;
 }
 
 .inputs {
@@ -60,6 +67,7 @@ input {
     box-sizing: border-box;
     width: calc(100% - var(--margin) * 2);
     margin: var(--margin);
+    outline: none;
 }
 
 input[type="checkbox"] {
@@ -78,20 +86,56 @@ input[type="checkbox"] {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+}
+.bottom-pos {
+    position: fixed;
+    bottom: 100px;
+    left: 0px;
+    transform: rotate(90deg);
+}
+
+.buttons {
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     overflow: hidden;
     user-select: none;
     z-index: 900;
 }
-.pagination:nth-child(2) {
-    bottom: 90px;
-}
-.pagination .arrow.btn:hover {
+.buttons .arrow.btn:hover {
     background: silver;
 }
-.pagination .arrow {
+.buttons .arrow {
     padding: 10px;
     cursor: pointer;
     background: white;
+}
+
+.sidebar {
+    width: 100px;
+    position: fixed;
+    top: 0;right: 100%;
+    z-index: 900;
+    height: 100%;
+    background: white;
+    box-shadow: 0 0 9px 0px black;
+    transition: .2s;
+}
+.sidebar::after {
+    content: '';
+    background: #6edc7b;
+    position: absolute;
+    left: 100%;
+    top: 300px;
+    width: 30px;
+    height: 50px;
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+}
+.sidebar:hover {
+    right: calc(100% - 100px);
+}
+.sidebar img {
+    width: 100%;
+    margin: 0;
+    cursor: pointer;
 }

@@ -15,9 +15,17 @@ window.indentBottom = 20
 window.fontSize = 30
 window.fontColor = 'black'
 window.lineDelimiter = 1
-window.bgStyle = 'notebook' //notebook, zebra
+
+window.currentBg = 1
+
+
+window.backgrounds = {
+    1: 'img/notebook.jpg',
+    2: 'img/zebra.jpg'
+}
 
 window.start = () => {
+    document.getElementById('bg-image').src = backgrounds[currentBg]
     ctx.clearRect(0, 0, canv.width, canv.height)
     updateCurrentPage()
     class textHelper {

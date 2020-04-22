@@ -34,21 +34,25 @@
                 oninput="fontSize = event.target.valueAsNumber, start()">
         </form>
     </div>
-    <div class="pagination flex">
+    <div class="pagination buttons flex">
         <div class="arrow btn" onclick="prevPagination()">❮</div>
         <div class="arrow" id="cur-page"></div>
         <div class="arrow btn" onclick="nextPagination()">❯</div>
     </div>
-    <div class="pagination flex">
-        <div class="arrow btn" onclick="canv.height -= 100, start()">❮❮</div>
-        <div class="arrow btn" onclick="canv.height -= 10, start()">-</div>
-        <div class="arrow btn" onclick="canv.height -= 1, start()">.</div>
-        <div class="arrow btn" onclick="canv.height += 1, start()">*</div>
-        <div class="arrow btn" onclick="canv.height += 10, start()">+</div>
-        <div class="arrow btn" onclick="canv.height += 100, start()">❯❯</div>
+    <div class="bottom-pos buttons flex">
+        <div class="arrow btn" onclick="canv.height -= 100, start()">❮❮❮</div>
+        <div class="arrow btn" onclick="canv.height -= 10, start()">❮❮</div>
+        <div class="arrow btn" onclick="canv.height -= 1, start()">❮</div>
+        <div class="arrow btn" onclick="canv.height += 1, start()">❯</div>
+        <div class="arrow btn" onclick="canv.height += 10, start()">❯❯</div>
+        <div class="arrow btn" onclick="canv.height += 100, start()">❯❯❯</div>
+    </div>
+    <div class="sidebar flex column">
+        <img src="img/notebook.jpg" onclick="currentBg = 1, start()">
+        <img src="img/zebra.jpg" onclick="currentBg = 2, start()">
     </div>
     <div class="content">
-        <img src="img/notebook.jpg" id="notebook">
+        <img id="bg-image">
         <canvas id="canv"></canvas>
     </div>
 
