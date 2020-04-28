@@ -12,8 +12,9 @@ window.onpreset = () => {
         window.spacing = 23
         window.lineHeight = 121
         window.wave = 15
-        window.randomSize = 16
-        window.indentTop = 61
+        window.perlinStep = 3
+        window.randomSize = 0
+        window.indentTop = 81
         window.indentBottom = 20
         window.indentRight = 60
         window.indentLeft = 30
@@ -24,16 +25,17 @@ window.onpreset = () => {
         canv.height = 2455
     }
     else if (preset == 'zebra') {
-        window.spacing = 40
+        window.spacing = 23
         window.lineHeight = 91.5
-        window.wave = 10
-        window.randomSize = 20
-        window.indentTop = 61
+        window.wave = 15
+        window.perlinStep = 4
+        window.randomSize = 0
+        window.indentTop = 81
         window.indentBottom = 197
         window.indentRight = 150
         window.indentLeft = 203
         window.fontColor = 'black'
-        window.fontSize = 78
+        window.fontSize = 57
 
         window.currentBg = 2
         canv.height = 2720
@@ -42,8 +44,9 @@ window.onpreset = () => {
         window.spacing = 16
         window.lineHeight = 40
         window.wave = 1
+        window.perlinStep = 3
         window.randomSize = 0;
-        window.indentTop = 10
+        window.indentTop = 30
         window.indentBottom = 20
         window.indentRight = 20
         window.indentLeft = 20

@@ -7,6 +7,8 @@ window.start = () => {
     class textHelper {
         constructor() {
             this.reset()
+            this.perlinStep = 1
+            this.perlinK = 0
         }
         reset() {
             this.posX = indentLeft
@@ -15,6 +17,23 @@ window.start = () => {
         newY() {
             this.posX = indentLeft
             this.posY += lineHeight
+            this.perlinHeight = 0
+        }
+        perlin() {
+            if(this.perlinStep >= window.perlinStep)
+            {
+                this.perlinStep = 1
+                var perlinKPrev = this.perlinK
+                this.perlinK = (Math.random() * wave - wave) / window.perlinStep
+                if(perlinKPrev >= 0 && this.perlinK >= 0 || perlinKPrev < 0 && this.perlinK < 0) {
+                    this.perlinK = -this.perlinK
+                }
+
+            }
+            // console.log(this.perlinK)
+            this.perlinHeight += this.perlinK
+            this.perlinStep++
+            return this.perlinHeight
         }
         parse(text) {
             var page = 1
@@ -46,7 +65,7 @@ window.start = () => {
                 this.arr[index + step] = {
                     page: page,
                     posX: this.posX,
-                    posY: this.posY + (Math.random() * wave) + 20,
+                    posY: this.posY + this.perlin(),
                     symbol: item
                 }
                 this.posX += spacing
