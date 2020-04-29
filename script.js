@@ -13,9 +13,10 @@ window.start = () => {
         reset() {
             this.posX = indentLeft
             this.posY = indentTop
+            this.perlinHeight = 0
         }
         newY() {
-            this.posX = indentLeft
+            this.posX = indentLeft + (Math.random() * horisWave - horisWave)
             this.posY += lineHeight
             this.perlinHeight = 0
         }
@@ -74,7 +75,7 @@ window.start = () => {
         }
     }
     window.textH = new textHelper()
-    ctx.font = `${fontSize + (Math.random() * randomSize - randomSize)}px main`;
+    ctx.font = `${fontWeight} ${fontSize + (Math.random() * randomSize - randomSize)}px main`;
     ctx.fillStyle = fontColor
     textH.parse(text).forEach(item => {
         if (item.page == currentPage) {

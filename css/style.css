@@ -58,14 +58,15 @@ textarea {
     box-shadow: 0 0 20px -10px black;
     background: white;
     z-index: 20;
-    transition: .2s;
+    transition: .2s ease-in-out .7s;
 }
 
 .inputs:hover {
     bottom: 0;
+    transition: .2s;
 }
 
-input {
+input, select {
     --margin: 5px;
     padding: 5px;
     box-sizing: border-box;

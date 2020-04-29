@@ -17,10 +17,12 @@
                 oninput="spacing = event.target.valueAsNumber, start()">
             <input type="number" placeholder="Высота строки (40)"
                 oninput="lineHeight = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Разброс по высоте (1)"
+            <input type="number" placeholder="Коэффициент вертикального разброса"
                 oninput="wave = event.target.valueAsNumber, start()">
             <input type="number" placeholder="Расстояние между буквами для генерации шума(1)"
                 oninput="perlinStep = event.target.valueAsNumber, start()">
+            <input type="number" placeholder="Коэффициент горизонтального разброса"
+                oninput="horisWave = event.target.valueAsNumber, start()">
             <input type="number" placeholder="Разброс по размеру (0)"
                 oninput="randomSize = event.target.valueAsNumber, start()">
             <input type="number" placeholder="Отступ сверху (10)"
@@ -34,6 +36,21 @@
             <input type="color" placeholder="Цвет" oninput="fontColor = event.target.value, start()">
             <input type="number" placeholder="Размер текста(30)"
                 oninput="fontSize = event.target.valueAsNumber, start()">
+                <select onchange="fontWeight = event.target.value, start()">
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                    <option value="400">400</option>
+                    <option value="500">500</option>
+                    <option value="600">600</option>
+                    <option value="700">700</option>
+                    <option value="800">800</option>
+                    <option value="900">900</option>
+                    <option value="bold">bold</option>
+                    <option value="bolder">bolder</option>
+                    <option value="lighter">lighter</option>
+                    <option value="normal" selected>normal</option>
+                </select>
         </form>
     </div>
     <div class="pagination buttons flex">
