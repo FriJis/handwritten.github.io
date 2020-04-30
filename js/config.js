@@ -16,14 +16,22 @@ window.onpreset = () => {
         window.perlinStep = 3
         window.horisWave = 40
         window.randomSize = 0
+
         window.indentTop = 81
         window.indentBottom = 20
         window.indentRight = 60
         window.indentLeft = 30
+
         window.fontColor = 'black'
         window.fontSize = 50
+        window.fontWeight = 'normal'
+
+        window.mistakeCount = 2
+        window.mistakeProbality = 0.5
 
         window.currentBg = 1
+        window.bgAlpha = 0.5
+
         canv.height = 2455
     }
     else if (preset == 'zebra') {
@@ -41,7 +49,10 @@ window.onpreset = () => {
         window.fontSize = 57
         window.fontWeight = 'normal'
 
+        window.mistakeCount = 2
+        window.mistakeProbality = 0.5
         window.currentBg = 2
+        window.bgAlpha = 0.5
         canv.height = 2720
     }
     else if (preset == 'zebra2') {
@@ -59,7 +70,10 @@ window.onpreset = () => {
         window.fontSize = 78
         window.fontWeight = 'normal'
 
+        window.mistakeCount = 2
+        window.mistakeProbality = 0.01
         window.currentBg = 3
+        window.bgAlpha = 0.5
         canv.height = 2800
     }
     else {//standart
@@ -77,7 +91,10 @@ window.onpreset = () => {
         window.fontSize = 30
         window.fontWeight = 'normal'
 
+        window.mistakeCount = 2
+        window.mistakeProbality = 0.5
         window.currentBg = 1
+        window.bgAlpha = 0.5
         canv.height = 2720
     }
 }

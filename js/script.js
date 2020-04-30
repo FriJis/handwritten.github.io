@@ -3,6 +3,7 @@ var ctx = canv.getContext('2d')
 
 window.start = () => {
     document.getElementById('bg-image').src = backgrounds[currentBg]
+    document.getElementById('bg-image').style.opacity = bgAlpha
     ctx.clearRect(0, 0, canv.width, canv.height)
     class textHelper {
         constructor() {
@@ -21,12 +22,11 @@ window.start = () => {
             this.perlinHeight = 0
         }
         perlin() {
-            if(this.perlinStep >= window.perlinStep)
-            {
+            if (this.perlinStep >= window.perlinStep) {
                 this.perlinStep = 1
                 var perlinKPrev = this.perlinK
                 this.perlinK = (Math.random() * wave - wave) / window.perlinStep
-                if(perlinKPrev >= 0 && this.perlinK >= 0 || perlinKPrev < 0 && this.perlinK < 0) {
+                if (perlinKPrev >= 0 && this.perlinK >= 0 || perlinKPrev < 0 && this.perlinK < 0) {
                     this.perlinK = -this.perlinK
                 }
 
@@ -38,7 +38,6 @@ window.start = () => {
         }
         parse(text) {
             var page = 1
-            var step = 0
             this.arr = []
 
             text.forEach((item, index) => {
@@ -62,12 +61,18 @@ window.start = () => {
                 if (item == '\n') {
                     this.newY()
                 }
+                var perlin = this.perlin()
+                //mastake
+                if (Math.random() <= mistakeProbality && !(item == " " || item == '\n')) {
+                    var mistake = 1
+                }
                 allPage = page
-                this.arr[index + step] = {
+                this.arr[index] = {
                     page: page,
                     posX: this.posX,
-                    posY: this.posY + this.perlin(),
-                    symbol: item
+                    posY: this.posY + perlin,
+                    symbol: item,
+                    mistake: mistake || 0
                 }
                 this.posX += spacing
             })
@@ -79,6 +84,12 @@ window.start = () => {
     ctx.fillStyle = fontColor
     textH.parse(text).forEach(item => {
         if (item.page == currentPage) {
+            if (item.mistake) {
+                for(var i = 0; i < mistakeCount; i++) {
+                    ctx.fillText(randArrayObject(glossary), item.posX, item.posY);
+
+                }
+            }
             ctx.fillText(item.symbol, item.posX, item.posY);
         }
     })
@@ -89,6 +100,7 @@ window.text = [...'']
 window.hiddenSwitcher = 1
 window.currentPage = 1
 window.allPage = 1
+window.glossary = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя']
 var uiPanel = document.querySelector('[panel]')
 addEventListener('keydown', event => {
     if (event.code == 'F4') {

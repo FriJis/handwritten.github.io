@@ -36,23 +36,35 @@
             <input type="color" placeholder="Цвет" oninput="fontColor = event.target.value, start()">
             <input type="number" placeholder="Размер текста(30)"
                 oninput="fontSize = event.target.valueAsNumber, start()">
-                <select onchange="fontWeight = event.target.value, start()">
-                    <option value="100">100</option>
-                    <option value="200">200</option>
-                    <option value="300">300</option>
-                    <option value="400">400</option>
-                    <option value="500">500</option>
-                    <option value="600">600</option>
-                    <option value="700">700</option>
-                    <option value="800">800</option>
-                    <option value="900">900</option>
-                    <option value="bold">bold</option>
-                    <option value="bolder">bolder</option>
-                    <option value="lighter">lighter</option>
-                    <option value="normal" selected>normal</option>
-                </select>
+            <select onchange="fontWeight = event.target.value, start()">
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700">700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="bold">bold</option>
+                <option value="bolder">bolder</option>
+                <option value="lighter">lighter</option>
+                <option value="normal" selected>normal</option>
+            </select>
+            <div class="flex column">
+                <h1>Фон</h1>
+                <input type="range" min="0" max="1" value="0.5" step="0.01"
+                    oninput="bgAlpha = event.target.value, start()">
+            </div>
         </form>
     </div>
+    
+    <div class="content">
+        <img id="bg-image">
+        <canvas id="canv"></canvas>
+    </div>
+
+
     <div class="pagination buttons flex">
         <div class="arrow btn" onclick="prevPagination()">❮</div>
         <div class="arrow" id="cur-page"></div>
@@ -70,14 +82,10 @@
         <img src="img/notebook.jpg" onclick="currentBg = 1, start()">
         <img src="img/zebra.jpg" onclick="currentBg = 2, start()">
     </div>
-    <div class="content">
-        <img id="bg-image">
-        <canvas id="canv"></canvas>
-    </div>
-
-    <script src="image.js"></script>
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+    <script src="js/lib.js"></script>
+    <script src="js/image.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
