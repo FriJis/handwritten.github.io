@@ -36,10 +36,15 @@ window.start = () => {
             return this.perlinHeight
         }
         parse(text) {
+            for(var i in reductions) {
+                let regular = new RegExp(i, 'gim')
+                text = text.replace(regular, reductions[i])
+            }
+            
             var page = 1
             this.arr = []
-
-            text.forEach((item, index) => {
+            var textArr = [...text]
+            textArr.forEach((item, index) => {
                 if (text[index] == " ") {
                     var length = this.posX
                     for (var i = index + 1; text[i] !== " " && i <= text.length; i++) {
@@ -47,7 +52,7 @@ window.start = () => {
                     }
                     if (length >= canv.width - indentRight) {
                         this.newY()
-                    }
+                    }                    
                 }
                 if (this.posX >= canv.width - indentRight) {
 
@@ -95,7 +100,7 @@ window.start = () => {
     updateCurrentPage()
 }
 
-window.text = [...'']
+window.text = ''
 window.hiddenSwitcher = 1
 window.currentPage = 1
 window.allPage = 1

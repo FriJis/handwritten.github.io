@@ -59,7 +59,7 @@ window.onimg = () => {
     document.getElementById('bg-image').style.opacity = bgAlpha
 }
 window.input = e => {
-    text = [...e.target.value]
+    text = e.target.value
     start()
 }
 window.onsection = e => {

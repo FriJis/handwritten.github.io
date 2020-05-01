@@ -52,7 +52,10 @@ body {
     cursor: pointer;
     user-select: all;
     overflow-wrap: anywhere;
+    margin: 10px 0;
+    background: rgb(185, 185, 185);
 }
+
 .content {
     width: 100%;
     max-width: 1280px;
