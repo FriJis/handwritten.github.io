@@ -4,84 +4,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 
 <body>
-    <div class="active" panel>
-        <textarea class="content" oninput="input(event)"></textarea>
-        <form class="inputs flex column">
-            <input type="number" placeholder="Расстояние между буквами (16)"
-                oninput="spacing = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Высота строки (40)"
-                oninput="lineHeight = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Коэффициент вертикального разброса"
-                oninput="wave = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Расстояние между буквами для генерации шума(1)"
-                oninput="perlinStep = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Коэффициент горизонтального разброса"
-                oninput="horisWave = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Разброс по размеру (0)"
-                oninput="randomSize = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Отступ сверху (10)"
-                oninput="indentTop = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Отступ снизу (20)"
-                oninput="indentBottom = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Отступ справа (20)"
-                oninput="indentRight = event.target.valueAsNumber, start()">
-            <input type="number" placeholder="Отступ слева(20)"
-                oninput="indentLeft = event.target.valueAsNumber, start()">
-            <input type="color" placeholder="Цвет" oninput="fontColor = event.target.value, start()">
-            <input type="number" placeholder="Размер текста(30)"
-                oninput="fontSize = event.target.valueAsNumber, start()">
-            <select onchange="fontWeight = event.target.value, start()">
-                <option value="100">100</option>
-                <option value="200">200</option>
-                <option value="300">300</option>
-                <option value="400">400</option>
-                <option value="500">500</option>
-                <option value="600">600</option>
-                <option value="700">700</option>
-                <option value="800">800</option>
-                <option value="900">900</option>
-                <option value="bold">bold</option>
-                <option value="bolder">bolder</option>
-                <option value="lighter">lighter</option>
-                <option value="normal" selected>normal</option>
-            </select>
-            <div class="flex column">
-                <h1>Фон</h1>
-                <input type="range" min="0" max="1" value="0.5" step="0.01"
-                    oninput="bgAlpha = event.target.value, start()">
+    <div class="flex content bg">
+        <div class="flex column flow">
+            <nav class="flex between">
+                <div class="btn" onclick="onsection(1)">Главная</div>
+                <div class="btn" onclick="onsection(2)">Генерация</div>
+                <div class="btn" onclick="onsection(3)">Шрифт</div>
+                <div class="btn" onclick="onsection(4)">Настройки</div>
+            </nav>
+            <div class="section" id="id1">
+                <textarea oninput="input(event)" placeholder="Введите текст"></textarea>
+                <fieldset>
+                    <legend>Отступы</legend>
+                    <div class="flex column">
+                        <input type="number" placeholder="Межбуквенное расстояние"
+                            oninput="spacing = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Межстрочный интервал"
+                            oninput="lineHeight = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Отступ сверху"
+                            oninput="indentTop = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Отступ снизу"
+                            oninput="indentBottom = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Отступ справа"
+                            oninput="indentRight = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Отступ слева"
+                            oninput="indentLeft = event.target.valueAsNumber, start()">
+                    </div>
+                </fieldset>
             </div>
-        </form>
-    </div>
-    
-    <div class="content">
-        <img id="bg-image">
-        <canvas id="canv"></canvas>
-    </div>
-
-
-    <div class="pagination buttons flex">
-        <div class="arrow btn" onclick="prevPagination()">❮</div>
-        <div class="arrow" id="cur-page"></div>
-        <div class="arrow btn" onclick="nextPagination()">❯</div>
+            <div class="section" id="id2">
+                <fieldset>
+                    <legend>Генерация</legend>
+                    <div class="flex column">
+                        <input type="number" placeholder="Коэффициент вертикального разброса"
+                            oninput="wave = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Количество букв для отсчета вертикальной генерации"
+                            oninput="perlinStep = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Коэффициент горизонтального разброса по левую сторону"
+                            oninput="horisWave = event.target.valueAsNumber, start()">
+                        <input type="number" placeholder="Коэффициент разброса по размеру"
+                            oninput="randomSize = event.target.valueAsNumber, start()">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Ошибки</legend>
+                    <input type="number" placeholder="Вероятность ошибок (0 - 1)"
+                        oninput="mistakeProbality = event.target.valueAsNumber, start()">
+                    <input type="number" placeholder="Количество символов на 1 ошибку"
+                        oninput="mistakeCount = event.target.valueAsNumber, start()">
+                </fieldset>
+            </div>
+            <div class="section" id="id3">
+                <fieldset>
+                    <legend>Шрифт</legend>
+                    <div class="flex column">
+                        <input type="color" placeholder="Цвет" oninput="fontColor = event.target.value, start()">
+                        <input type="number" placeholder="Размер текста"
+                            oninput="fontSize = event.target.valueAsNumber, start()">
+                        <label for="">Толщина</label>
+                        <select onchange="fontWeight = event.target.value, start()">
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                            <option value="400">400</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="700">700</option>
+                            <option value="800">800</option>
+                            <option value="900">900</option>
+                            <option value="bold">bold</option>
+                            <option value="bolder">bolder</option>
+                            <option value="lighter">lighter</option>
+                            <option value="normal" selected>normal</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="section" id="id4">
+                <fieldset>
+                    <legend>Настройки</legend>
+                    <nav class="flex column">
+                        <div class="btn" onclick="saveImage(getImage(canv))">Сохранить png</div>
+                        <div class="btn" onclick="start()">Обновить</div>
+                        <label for="">Прозрачность фона</label>
+                        <input type="range" min="0" max="1" value="1" step="0.01"
+                            oninput="bgAlpha = event.target.value, onimg()">
+                        <fieldset>
+                            <legend>Высота холста</legend>
+                            <nav class="flex column">
+                                <div class="flex between">
+                                    <div class="btn" onclick="canv.height -= 100, start()">-100px</div>
+                                    <div class="btn" onclick="canv.height -= 10, start()">-10px</div>
+                                    <div class="btn" onclick="canv.height -= 1, start()">-1px</div>
+                                    <div class="btn" onclick="canv.height += 1, start()">+1px</div>
+                                    <div class="btn" onclick="canv.height += 10, start()">+10px</div>
+                                    <div class="btn" onclick="canv.height += 100, start()">+100px</div>
+                                </div>
+                                <div class="flex column t-a-center">
+                                    <div class="btn" onclick="alert(canv.height)">Текущая высота</div>
+                                </div>
+                            </nav>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Конфиг</legend>
+                            <nav class="flex column">
+                                <div class="btn t-a-center" onclick="toJsonConfig()">Создать конфиг</div>
+                                <div config></div>
+                                <label for="">Выбрать существующий:</label>
+                                <div class="flex column" pick-config></div>
+                            </nav>
+                        </fieldset>
+                        
+                    </nav>
+                </fieldset>
+            </div>
+        </div>
+        <div class="cont flow">
+            <img id="bg-image">
+            <canvas id="canv"></canvas>
+            <div class="pagination buttons flex">
+                <div class="arrow btn" onclick="prevPagination()">❮</div>
+                <div class="arrow" id="cur-page"></div>
+                <div class="arrow btn" onclick="nextPagination()">❯</div>
+            </div>
+        </div>
     </div>
     <div class="bottom-pos buttons flex">
-        <div class="arrow btn" onclick="canv.height -= 100, start()">❮❮❮</div>
-        <div class="arrow btn" onclick="canv.height -= 10, start()">❮❮</div>
-        <div class="arrow btn" onclick="canv.height -= 1, start()">❮</div>
-        <div class="arrow btn" onclick="canv.height += 1, start()">❯</div>
-        <div class="arrow btn" onclick="canv.height += 10, start()">❯❯</div>
-        <div class="arrow btn" onclick="canv.height += 100, start()">❯❯❯</div>
     </div>
-    <div class="sidebar flex column">
-        <img src="img/notebook.jpg" onclick="currentBg = 1, start()">
-        <img src="img/zebra.jpg" onclick="currentBg = 2, start()">
-    </div>
+    <div class="sidebar flex column"></div>
     <script src="js/lib.js"></script>
     <script src="js/image.js"></script>
     <script src="js/config.js"></script>

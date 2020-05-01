@@ -1,9 +1,8 @@
-var canv = document.getElementById('canv')
+window.canv = document.getElementById('canv')
 var ctx = canv.getContext('2d')
 
 window.start = () => {
     document.getElementById('bg-image').src = backgrounds[currentBg]
-    document.getElementById('bg-image').style.opacity = bgAlpha
     ctx.clearRect(0, 0, canv.width, canv.height)
     class textHelper {
         constructor() {
@@ -85,7 +84,7 @@ window.start = () => {
     textH.parse(text).forEach(item => {
         if (item.page == currentPage) {
             if (item.mistake) {
-                for(var i = 0; i < mistakeCount; i++) {
+                for (var i = 0; i < mistakeCount; i++) {
                     ctx.fillText(randArrayObject(glossary), item.posX, item.posY);
 
                 }
@@ -100,48 +99,11 @@ window.text = [...'']
 window.hiddenSwitcher = 1
 window.currentPage = 1
 window.allPage = 1
-window.glossary = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя']
-var uiPanel = document.querySelector('[panel]')
-addEventListener('keydown', event => {
-    if (event.code == 'F4') {
-        hiddenSwitcher = !hiddenSwitcher
-        if (!hiddenSwitcher) {
-            uiPanel.classList.remove('active')
-        } else {
-            uiPanel.classList.add('active')
-        }
-    }
-})
-addEventListener('keydown', event => {
-    if (event.code == 'F9') {
-        saveImage(getImage(canv))
-    }
-})
-addEventListener('keydown', event => {
-    if (event.code == 'F7') {
-        start()
-    }
-})
-updateCurrentPage = () => {
-    let el = document.querySelector('#cur-page')
-    el.innerHTML = currentPage + '/' + allPage
-}
-window.nextPagination = () => {
-    if (currentPage < allPage) {
-        currentPage++
-        start()
-    }
-}
-window.prevPagination = () => {
-    if (currentPage > 1) {
-        currentPage--
-        start()
-    }
-}
-onpreset()
+canv.width = 1920
+
+sidebarGeneration()
+pickConfigGeneration()
+importConfig()
 start()
 
-window.input = e => {
-    text = [...e.target.value]
-    start()
-}
+onsection(1)

@@ -13,43 +13,71 @@
 }
 
 [panel] {
-    display: none;
 }
 
 [panel].active {
-    display: flex;
 }
-
-.content canvas, .content img {
+body {
+    background: #eaeef1;
+}
+.bg {
+    background: white;
+}
+.btn {
+    user-select: none;
+    cursor: pointer;
+}
+.cont {
+    position: relative;
+}
+.cont canvas, .cont img {
     display: block;
     width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.cont img {
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid rgba(0, 0, 0, 0.5);
 }
-
+.cont canvas {
+    position: relative;
+    z-index: 2;
+}
+[config] {
+    cursor: pointer;
+    user-select: all;
+    overflow-wrap: anywhere;
+}
 .content {
     width: 100%;
     max-width: 1280px;
     margin-right: auto;
     margin-left: auto;
-    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
 }
-
+nav .btn {
+    padding: 20px;
+}
+nav .btn:hover {
+    background: silver;
+}
 textarea {
     resize: vertical;
-    width: 100%;
+    width: calc(100% - 6px);
     min-height: 500px;
     padding: 20px;
     box-sizing: border-box;
     outline: none;
-    border-radius: 10px;
-    border: 1px solid #444444;
-    margin: 20px 0;
-    background-color: #f2f2f2;
+    border-radius: 2px;
+    border: 1px dashed rgba(68, 68, 68, 0.55);
+    margin: 0px 3px 20px;
+    background-color: #ffffff;
+    font-size: 15px;
+    line-height: 20px;
 }
-
+/*
 .inputs {
     position: fixed;
     right: 40px;
@@ -64,7 +92,7 @@ textarea {
 .inputs:hover {
     bottom: 0;
     transition: .2s;
-}
+}*/
 
 input, select {
     --margin: 5px;
@@ -77,23 +105,34 @@ input, select {
 
 input[type="checkbox"] {
     width: 15px;
-}
+} 
 
 .flex {
     display: flex;
 }
-
+.t-a-center {
+text-align: center;
+}
 .flex.column {
     flex-direction: column;
+}
+.flex>.flow {
+    flex: 1;
+}
+.flex.between { 
+    justify-content: space-between;
 }
 
 .pagination {
     position: fixed;
+    opacity: 0.2;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
 }
-
+.pagination:hover {
+    opacity: 1;
+}
 .bottom-pos {
     position: fixed;
     bottom: 100px;

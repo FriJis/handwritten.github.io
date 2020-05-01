@@ -1,100 +1,37 @@
 
-window.preset = 'zebra2'
-canv.width = 1920
+window.preset = 'zebra'
+window.glossary = [...'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'] //glossary mistake
 
-window.backgrounds = {
-    1: 'img/notebook.jpg',
-    2: 'img/zebra.jpg',
-    3: 'img/zebra2.jpg'
-}
+config = {}
+config['notebook'] = '{"spacing":23,"lineHeight":121,"wave":15,"perlinStep":3,"horisWave":40,"randomSize":0,"indentTop":81,"indentBottom":20,"indentRight":60,"indentLeft":30,"fontColor":"black","fontSize":50,"fontWeight":"normal","mistakeCount":2,"mistakeProbality":0.01,"currentBg":0,"bgAlpha":1,"canvHeight":2455}'
+config['zebra'] = '{"spacing":23,"lineHeight":91.5,"wave":15,"perlinStep":4,"horisWave":40,"randomSize":0,"indentTop":81,"indentBottom":197,"indentRight":150,"indentLeft":203,"fontColor":"black","fontSize":57,"fontWeight":"normal","mistakeCount":2,"mistakeProbality":0.01,"currentBg":1,"bgAlpha":1,"canvHeight":2720}'
+config['zebra2'] = '{"spacing":30,"lineHeight":84.5,"wave":15,"perlinStep":4,"horisWave":60,"randomSize":10,"indentTop":215,"indentBottom":197,"indentRight":150,"indentLeft":203,"fontColor":"black","fontSize":78,"fontWeight":"normal","mistakeCount":2,"mistakeProbality":0.01,"currentBg":2,"bgAlpha":1,"canvHeight":2800}'
 
-window.onpreset = () => {
-    if (preset == 'notebook') {
-        window.spacing = 23
-        window.lineHeight = 121
-        window.wave = 15
-        window.perlinStep = 3
-        window.horisWave = 40
-        window.randomSize = 0
+window.backgrounds = [
+    'img/notebook.jpg',
+    'img/zebra.jpg',
+    'img/zebra2.jpg'
+]
 
-        window.indentTop = 81
-        window.indentBottom = 20
-        window.indentRight = 60
-        window.indentLeft = 30
+/* DEFAULT */
+window.spacing = 16
+window.lineHeight = 40
+window.wave = 1
+window.perlinStep = 3
+window.randomSize = 0;
+window.horisWave = 40
+window.indentTop = 30
+window.indentBottom = 20
+window.indentRight = 20
+window.indentLeft = 20
+window.fontColor = 'black'
+window.fontSize = 30
+window.fontWeight = 'normal'
 
-        window.fontColor = 'black'
-        window.fontSize = 50
-        window.fontWeight = 'normal'
+window.mistakeCount = 2
+window.mistakeProbality = 0.01
+window.currentBg = 1
+window.bgAlpha = 1
+canv.height = 2720
+/* DEFAULT */
 
-        window.mistakeCount = 2
-        window.mistakeProbality = 0.5
-
-        window.currentBg = 1
-        window.bgAlpha = 0.5
-
-        canv.height = 2455
-    }
-    else if (preset == 'zebra') {
-        window.spacing = 23
-        window.lineHeight = 91.5
-        window.wave = 15
-        window.perlinStep = 4
-        window.horisWave = 40
-        window.randomSize = 0
-        window.indentTop = 81
-        window.indentBottom = 197
-        window.indentRight = 150
-        window.indentLeft = 203
-        window.fontColor = 'black'
-        window.fontSize = 57
-        window.fontWeight = 'normal'
-
-        window.mistakeCount = 2
-        window.mistakeProbality = 0.5
-        window.currentBg = 2
-        window.bgAlpha = 0.5
-        canv.height = 2720
-    }
-    else if (preset == 'zebra2') {
-        window.spacing = 30
-        window.lineHeight = 84.5
-        window.wave = 15
-        window.perlinStep = 4
-        window.horisWave = 60
-        window.randomSize = 10
-        window.indentTop = 215
-        window.indentBottom = 197
-        window.indentRight = 150
-        window.indentLeft = 203
-        window.fontColor = 'black'
-        window.fontSize = 78
-        window.fontWeight = 'normal'
-
-        window.mistakeCount = 2
-        window.mistakeProbality = 0.01
-        window.currentBg = 3
-        window.bgAlpha = 0.5
-        canv.height = 2800
-    }
-    else {//standart
-        window.spacing = 16
-        window.lineHeight = 40
-        window.wave = 1
-        window.perlinStep = 3
-        window.randomSize = 0;
-        window.horisWave = 40
-        window.indentTop = 30
-        window.indentBottom = 20
-        window.indentRight = 20
-        window.indentLeft = 20
-        window.fontColor = 'black'
-        window.fontSize = 30
-        window.fontWeight = 'normal'
-
-        window.mistakeCount = 2
-        window.mistakeProbality = 0.5
-        window.currentBg = 1
-        window.bgAlpha = 0.5
-        canv.height = 2720
-    }
-}
