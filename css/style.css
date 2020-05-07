@@ -1,15 +1,10 @@
-@font-face {
-    font-family: main;
-    src: url('../fonts/bygeoFixed.otf');
-}
-
 * {
     font-family: font;
 }
 
 @font-face {
     font-family: font;
-    src: url(../fonts/HelveticaNeueCyr-Light.ttf);
+    src: url(../fonts/systems/HelveticaNeueCyr-Light.ttf);
 }
 
 body {

@@ -29,19 +29,16 @@ window.start = () => {
                 if (perlinKPrev >= 0 && this.perlinK >= 0 || perlinKPrev < 0 && this.perlinK < 0) {
                     this.perlinK = -this.perlinK
                 }
-
             }
-            // console.log(this.perlinK)
             this.perlinHeight += this.perlinK
             this.perlinStep++
             return this.perlinHeight
         }
         parse(text) {
-            for(var i in reductions) {
+            for (var i in reductions) {
                 let regular = new RegExp(i, 'gim')
                 text = text.replace(regular, reductions[i])
             }
-            
             var page = 1
             this.arr = []
             var textArr = [...text]
@@ -53,13 +50,9 @@ window.start = () => {
                     }
                     if (length >= canv.width - indentRight) {
                         this.newY()
-                    }                    
+                    }
                 }
-                
-
-                
                 if (this.posX >= canv.width - indentRight) {
-
                     this.newY()
                 }
                 if (this.posY >= canv.height - indentBottom) {
@@ -89,35 +82,36 @@ window.start = () => {
     }
     window.textH = new textHelper()
     window.objectMainText = textH.parse(text)
-    
-   rewrite()
+    rewrite()
 }
 window.rewrite = () => {
-    
     ctx.clearRect(0, 0, canv.width, canv.height)
     objectMainText.forEach(item => {
         if (item.page == currentPage) {
             if (item.mistake) {
                 for (var i = 0; i < mistakeCount; i++) {
                     ctx.fillText(randArrayObject(glossary), item.posX, item.posY);
-
                 }
             }
             ctx.fillText(item.symbol, item.posX, item.posY);
         }
     })
-    updateCurrentPage()
-
+    updateCurrentPageInPagination()
 }
+
+//system variables
 window.text = ''
-window.hiddenSwitcher = 1
+window.fullscreen = 1
 window.currentPage = 1
 window.allPage = 1
 canv.width = 1920
+//system variables
 
-sidebarGeneration()
-pickConfigGeneration()
-importConfig()
+generateStyleForMainFont()
+generateGlosaryForMistakes()
+sidebarImgGeneration()
+generateConfigsInSettings()
+importConfigFromJson()
 start()
 
 onsection(1)

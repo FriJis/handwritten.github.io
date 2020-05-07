@@ -2,7 +2,7 @@ window.randArrayObject = (arr) => {
     var rand = Math.floor(Math.random() * arr.length);
     return arr[rand];
 }
-window.toJsonConfig = () => {
+window.convertConfigToJson = () => {
     let json = JSON.stringify({
         spacing,
         lineHeight,
@@ -25,18 +25,16 @@ window.toJsonConfig = () => {
     let exports = document.querySelector('[config]')
     exports.innerHTML = json
 }
-window.pickConfigGeneration = () => {    
-    for(var index in config) {
+window.generateConfigsInSettings = () => {
+    for (var index in config) {
         let btn = document.createElement('div')
-        console.log('btn');
         btn.setAttribute('class', 'btn')
-        btn.setAttribute('onclick', 'preset = "'+ index +'", importConfig(), start()')
+        btn.setAttribute('onclick', 'preset = "' + index + '", importConfigFromJson(), start()')
         btn.innerHTML = index
-        
         document.querySelector('[pick-config]').append(btn)
     }
 }
-window.sidebarGeneration = () => {
+window.sidebarImgGeneration = () => {
     backgrounds.forEach((item, index) => {
         let img = document.createElement('img')
         img.setAttribute('src', item)
@@ -44,24 +42,27 @@ window.sidebarGeneration = () => {
         document.querySelector('.sidebar').append(img)
     })
 }
-window.importConfig = () => {
+window.importConfigFromJson = () => {
     try {
         let json = JSON.parse(config[preset])
-        console.log(json)
         Object.assign(window, json)
         canv.height = json.canvHeight || 1000
     } catch{ }
 }
-window.onimg = () => {
+window.onImgOpacity = () => {
     document.getElementById('bg-image').style.opacity = bgAlpha
-}
-window.input = e => {
-    text = e.target.value
-    start()
 }
 window.onsection = e => {
     document.querySelectorAll('.section').forEach(item => (item.style.display = 'none'))
     var section = document.getElementById('id' + e).style.display = 'block'
+}
+window.generateStyleForMainFont = () => {
+    let style = document.createElement('style')
+    style.innerHTML = '@font-face {font-family: main;src: url("fonts/' + mainFont + '");}'
+    document.body.append(style)
+}
+window.generateGlosaryForMistakes = () => {
+    window.glossary = [...glossary]
 }
 window.nextPagination = () => {
     if (currentPage < allPage) {
@@ -78,7 +79,7 @@ window.prevPagination = () => {
 addEventListener('keydown', event => {
     var uiPanel = document.querySelector('.cont')
     if (event.code == 'F4') {
-        hiddenSwitcher = !hiddenSwitcher
+        fullscreen = !fullscreen
         uiPanel.classList.toggle('active')
     }
 })
@@ -92,7 +93,7 @@ addEventListener('keydown', event => {
         start()
     }
 })
-updateCurrentPage = () => {
+updateCurrentPageInPagination = () => {
     let el = document.querySelector('#cur-page')
     el.innerHTML = currentPage + '/' + allPage
 }

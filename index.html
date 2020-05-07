@@ -18,7 +18,7 @@
                 <div class="btn" onclick="onsection(4)">Настройки</div>
             </nav>
             <div class="section" id="id1">
-                <textarea oninput="input(event)" placeholder="Введите текст"></textarea>
+                <textarea oninput="text = event.target.value, start()" placeholder="Введите текст"></textarea>
                 <fieldset>
                     <legend>Отступы</legend>
                     <div class="flex column">
@@ -93,7 +93,7 @@
                         <div class="btn" onclick="start()">Обновить</div>
                         <label for="">Непрозрачность фона</label>
                         <input type="range" min="0" max="1" value="1" step="0.01"
-                            oninput="bgAlpha = event.target.value, onimg()">
+                            oninput="bgAlpha = event.target.value, onImgOpacity()">
                         <fieldset>
                             <legend>Высота холста</legend>
                             <nav class="flex column">
@@ -113,7 +113,7 @@
                         <fieldset>
                             <legend>Конфиг</legend>
                             <nav class="flex column">
-                                <div class="btn t-a-center" onclick="toJsonConfig()">Создать конфиг</div>
+                                <div class="btn t-a-center" onclick="convertConfigToJson()">Создать конфиг</div>
                                 <div config></div>
                                 <label for="">Выбрать существующий:</label>
                                 <div class="flex column" pick-config></div>
@@ -133,18 +133,11 @@
             </div>
         </div>
     </div>
-    <style>
-        .sfgjfshgkfjsdgf {
-            padding: 0;
-            margin: 0;
-            right: 3;
-        }
-    </style>
     <div class="sidebar flex column"></div>
-    <script src="js/reductions.js"></script>
+    <script src="config/reductions.js"></script>
+    <script src="config/app.js"></script>
     <script src="js/lib.js"></script>
     <script src="js/image.js"></script>
-    <script src="js/config.js"></script>
     <script src="js/script.js"></script>
 </body>
 
