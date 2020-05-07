@@ -20,15 +20,12 @@ window.toJsonConfig = () => {
         mistakeCount,
         mistakeProbality,
         currentBg,
-        bgAlpha,
         canvHeight: canv.height
     })
     let exports = document.querySelector('[config]')
     exports.innerHTML = json
 }
-window.pickConfigGeneration = () => {
-    console.log(config);
-    
+window.pickConfigGeneration = () => {    
     for(var index in config) {
         let btn = document.createElement('div')
         console.log('btn');
@@ -69,13 +66,13 @@ window.onsection = e => {
 window.nextPagination = () => {
     if (currentPage < allPage) {
         currentPage++
-        start()
+        rewrite()
     }
 }
 window.prevPagination = () => {
     if (currentPage > 1) {
         currentPage--
-        start()
+        rewrite()
     }
 }
 addEventListener('keydown', event => {

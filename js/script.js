@@ -3,7 +3,6 @@ var ctx = canv.getContext('2d')
 
 window.start = () => {
     document.getElementById('bg-image').src = backgrounds[currentBg]
-    ctx.clearRect(0, 0, canv.width, canv.height)
     class textHelper {
         constructor() {
             this.reset()
@@ -48,12 +47,15 @@ window.start = () => {
                 if (text[index] == " ") {
                     var length = this.posX
                     for (var i = index + 1; text[i] !== " " && i <= text.length; i++) {
-                        length += spacing
+                        length += ctx.measureText(item).width + spacing
                     }
                     if (length >= canv.width - indentRight) {
                         this.newY()
                     }                    
                 }
+                
+
+                
                 if (this.posX >= canv.width - indentRight) {
 
                     this.newY()
@@ -78,15 +80,20 @@ window.start = () => {
                     symbol: item,
                     mistake: mistake || 0
                 }
-                this.posX += spacing
+                this.posX += ctx.measureText(item).width + spacing
             })
             return this.arr
         }
     }
     window.textH = new textHelper()
+    window.objectMainText = textH.parse(text)
     ctx.font = `${fontWeight} ${fontSize + (Math.random() * randomSize - randomSize)}px main`;
     ctx.fillStyle = fontColor
-    textH.parse(text).forEach(item => {
+   rewrite()
+}
+window.rewrite = () => {
+    ctx.clearRect(0, 0, canv.width, canv.height)
+    objectMainText.forEach(item => {
         if (item.page == currentPage) {
             if (item.mistake) {
                 for (var i = 0; i < mistakeCount; i++) {
@@ -98,8 +105,8 @@ window.start = () => {
         }
     })
     updateCurrentPage()
-}
 
+}
 window.text = ''
 window.hiddenSwitcher = 1
 window.currentPage = 1
