@@ -2,6 +2,8 @@ window.canv = document.getElementById('canv')
 var ctx = canv.getContext('2d')
 
 window.start = () => {
+    ctx.font = `${fontWeight} ${fontSize + (Math.random() * randomSize - randomSize)}px main`;
+    ctx.fillStyle = fontColor
     document.getElementById('bg-image').src = backgrounds[currentBg]
     class textHelper {
         constructor() {
@@ -87,11 +89,11 @@ window.start = () => {
     }
     window.textH = new textHelper()
     window.objectMainText = textH.parse(text)
-    ctx.font = `${fontWeight} ${fontSize + (Math.random() * randomSize - randomSize)}px main`;
-    ctx.fillStyle = fontColor
+    
    rewrite()
 }
 window.rewrite = () => {
+    
     ctx.clearRect(0, 0, canv.width, canv.height)
     objectMainText.forEach(item => {
         if (item.page == currentPage) {
