@@ -44,13 +44,17 @@ window.start = () => {
             var textArr = [...text]
             textArr.forEach((item, index) => {
                 if (text[index] == " ") {
-                    var length = this.posX
-                    for (var i = index + 1; text[i] !== " " && i <= text.length; i++) {
-                        length += ctx.measureText(item).width + spacing
-                    }
-                    if (length >= canv.width - indentRight) {
-                        this.newY()
-                    }
+                    try {
+                        var length = this.posX
+                        for (var i = index + 1; text[i].match(/[ ]/) == null && i <= text.length; i++) {
+                            
+                            length += ctx.measureText(item).width + spacing
+                        }
+                        if (length >= canv.width - indentRight) {
+                            this.newY()
+                        }
+                    } catch {}
+                    
                 }
                 if (this.posX >= canv.width - indentRight) {
                     this.newY()
