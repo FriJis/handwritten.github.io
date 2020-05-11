@@ -46,7 +46,7 @@ window.start = () => {
                 if (text[index] == " ") {
                     try {
                         var length = this.posX
-                        for (var i = index + 1; text[i].match(/[ ]/) == null && i <= text.length; i++) {
+                        for (var i = index + 1; text[i].match(/[\s ]/) == null && i <= text.length; i++) {
                             
                             length += ctx.measureText(item).width + spacing
                         }
