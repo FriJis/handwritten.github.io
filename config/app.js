@@ -37,6 +37,6 @@ window.fontWeight = 'normal'
 window.mistakeCount = 2
 window.mistakeProbality = 0.01
 window.currentBg = 1
-window.bgAlpha = 1
+window.bgAlpha = 0.5
 canv.height = 2720
 // default config
